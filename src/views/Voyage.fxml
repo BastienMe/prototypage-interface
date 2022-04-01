@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="controller.Controller">
+   <children>
+      <AnchorPane layoutX="-138.0" layoutY="-218.0" prefHeight="720.0" prefWidth="1280.0">
+         <children>
+            <Button fx:id="buttonContacter" layoutX="379.0" layoutY="401.0" mnemonicParsing="false" onAction="#OnContacterClicked" text="Contacter pour reserver">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Line endX="100.0" layoutX="480.0" layoutY="650.0" startX="-307.20001220703125" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
