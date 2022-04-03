@@ -1,7 +1,10 @@
 package controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 import controller.Controller;
 import javafx.application.Platform;
@@ -27,6 +30,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 //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
+//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
 public class Controller{
 	
 	@FXML TextField textFieldChat;
@@ -40,6 +44,7 @@ public class Controller{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/Discussion.fxml"));
 		Parent root = (Parent) loader.load();
 		Controller secController = loader.getController();
+		secController.lireFichierChat(0);
 		//secController.net = net;
 		//secController.easyModel = easyModel;
 		
@@ -54,26 +59,9 @@ public class Controller{
 	}
 	
 	public void OnEnvoyerMessageClicked(ActionEvent event) throws IOException {
-		//scrollPaneChat.setVvalue(1.0);  
 		if(textFieldChat.getText().length() != 0) {
-			System.out.print(textFieldChat.getText());
 			String textFinal = textFieldChat.getText();
 			textFieldChat.clear();
-			
-			/*int newLineCpt = textField.getText().length()/20;
-			if(textField.getText().length()>20) {
-				textFinal = "";
-				int j = 0;
-				for(int i = 0; i < textField.getText().length(); i++) {
-					if(i == 20 && j == 0) {
-						textFinal += "\n";
-						j = 2;
-					}
-					textFinal += textField.getText().charAt(i);
-					
-				}
-				
-			}*/
 			Text text = new Text(textFinal);
 			text.setWrappingWidth(150);
 			BorderPane borderPane = new BorderPane();
@@ -84,26 +72,97 @@ public class Controller{
 				borderPane1.setLeft(text);
 				
 				borderPane1.setStyle("-fx-background-color: #D3D3D3; -fx-background-radius: 5px;");
+				creeFichierChat(0);
+				ecrireFichierChat(0,hote,textFinal);
 				hote = !hote;
 			} else {
 				borderPane.setRight(borderPane1);
 				borderPane1.setRight(text);
 				
 				borderPane1.setStyle("-fx-background-color: #6e97f0; -fx-background-radius: 5px;");
+				creeFichierChat(0);
+				ecrireFichierChat(0,hote,textFinal);
 				hote = !hote;
 			}
-			System.out.println(text.getLayoutBounds().getWidth());
-			//vBoxChat.setSpacing(text.getBoundsInParent().getHeight() + 10);
 			
 			vBoxChat.getChildren().add(borderPane);
 			vBoxChat.autosize();
 			
 			anchorPaneChat.setPrefHeight(vBoxChat.getHeight());
 			scrollPaneChat.vbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
-			//scrollPaneChat.setVvalue(1.0);  
-			
 			
 			scrollPaneChat.vvalueProperty().bind(vBoxChat.heightProperty());
+			
+			
 		}
+	}
+	
+	public void creeFichierChat(int idVoyage) {
+		try {
+	      File file = new File("Discussions/chat_"+ idVoyage +".txt");
+	      file.createNewFile();
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+	}
+	
+	public void ecrireFichierChat(int idVoyage, boolean hote, String message) {
+		try {
+	      FileWriter fileWriter = new FileWriter("Discussions/chat_"+ idVoyage +".txt",true);
+	      if(hote) {
+	    	  fileWriter.write("*"+message+"\n");
+	      } else {
+	    	  fileWriter.write(message+"\n");
+	      }
+	      fileWriter.close();
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }
+	}
+	
+	public void lireFichierChat(int idVoyage) {
+		try {
+	      File file = new File("Discussions/chat_"+ idVoyage +".txt");
+	      if(file.exists()) {
+		      Scanner scanner = new Scanner(file);
+		      while (scanner.hasNextLine()) {
+		        String data = scanner.nextLine();
+		        if(data.charAt(0) == '*') {
+		        	setChat(true,data);
+		        } else setChat(false,data);
+		      }
+		      scanner.close();
+	      }
+	    } catch (FileNotFoundException e) {
+	      e.printStackTrace();
+	    }
+		
+	}
+	
+	public void setChat(boolean hote, String message) {
+		Text text = new Text(message);
+		text.setWrappingWidth(150);
+		BorderPane borderPane = new BorderPane();
+		borderPane.setPrefWidth(295);
+		BorderPane borderPane1 = new BorderPane();
+		if(!hote) {
+			borderPane.setLeft(borderPane1);
+			borderPane1.setLeft(text);
+			
+			borderPane1.setStyle("-fx-background-color: #D3D3D3; -fx-background-radius: 5px;");
+			hote = !hote;
+		} else {
+			borderPane.setRight(borderPane1);
+			borderPane1.setRight(text);
+			
+			borderPane1.setStyle("-fx-background-color: #6e97f0; -fx-background-radius: 5px;");
+			hote = !hote;
+		}
+		vBoxChat.getChildren().add(borderPane);
+		vBoxChat.autosize();
+		
+		anchorPaneChat.setPrefHeight(vBoxChat.getHeight());
+		scrollPaneChat.vbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
+		scrollPaneChat.setVvalue(1.0); 
 	}
 }
