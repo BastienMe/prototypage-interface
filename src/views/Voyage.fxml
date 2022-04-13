@@ -16,6 +16,8 @@
             </Button>
             <Line endX="100.0" layoutX="480.0" layoutY="650.0" startX="-307.20001220703125" />
             <Button layoutX="889.0" layoutY="271.0" mnemonicParsing="false" onAction="#onMessagerieClicked" text="Messagerie" />
+            <Button layoutX="680.0" layoutY="271.0" mnemonicParsing="false" onAction="#onConnexionHoteClicked" text="Connexion hote" />
+            <Button layoutX="690.0" layoutY="334.0" mnemonicParsing="false" onAction="#onConnexionClientClicked" text="Connexion client" />
          </children>
       </AnchorPane>
    </children>
