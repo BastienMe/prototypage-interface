@@ -6,23 +6,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <children>
-      <AnchorPane layoutX="-86.0" layoutY="-82.0" prefHeight="320.0" prefWidth="410.0">
+      <AnchorPane layoutX="-86.0" layoutY="-82.0" prefHeight="407.0" prefWidth="723.0">
          <children>
-            <TextField fx:id="textFieldChat" layoutX="94.0" layoutY="294.0" prefHeight="26.0" prefWidth="275.0" />
-            <Button fx:id="buttonEnvoyerMessage" layoutX="371.0" layoutY="294.0" mnemonicParsing="false" onAction="#OnEnvoyerMessageClicked" prefHeight="20.0" prefWidth="32.0" text="^" />
-            <Button fx:id="buttonHoteValiderVoyage" disable="true" layoutX="97.0" layoutY="84.0" mnemonicParsing="false" onAction="#onHoteValiderVoyageClicked" prefHeight="26.0" prefWidth="134.0" style="-fx-background-color: #0DFF00;" text="Valider le voyage" />
-            <ScrollPane fx:id="scrollPaneChat" fitToWidth="true" layoutX="97.0" layoutY="119.0" prefHeight="169.0" prefWidth="298.0">
+            <TextField fx:id="textFieldChat" layoutX="98.0" layoutY="357.0" prefHeight="26.0" prefWidth="576.0" />
+            <Button fx:id="buttonEnvoyerMessage" layoutX="676.0" layoutY="357.0" mnemonicParsing="false" onAction="#OnEnvoyerMessageClicked" prefHeight="20.0" prefWidth="32.0" text="^" />
+            <Button fx:id="buttonHoteValiderVoyage" disable="true" layoutX="237.0" layoutY="84.0" mnemonicParsing="false" onAction="#onHoteValiderVoyageClicked" prefHeight="26.0" prefWidth="134.0" style="-fx-background-color: #0DFF00;" text="Valider le voyage" />
+            <ScrollPane fx:id="scrollPaneChat" fitToWidth="true" layoutX="97.0" layoutY="119.0" prefHeight="225.0" prefWidth="611.0">
               <content>
                 <AnchorPane fx:id="anchorPaneChat" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="296.0">
                      <children>
-                        <VBox fx:id="vBoxChat" fillWidth="false" prefHeight="0.0" prefWidth="298.0" spacing="15.0" />
+                        <VBox fx:id="vBoxChat" fillWidth="false" prefHeight="0.0" prefWidth="611.0" spacing="15.0" />
                      </children>
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <Button fx:id="buttonRefuserVoyage" disable="true" layoutX="261.0" layoutY="84.0" mnemonicParsing="false" onAction="#onRefuserVoyageClicked" prefHeight="26.0" prefWidth="134.0" style="-fx-background-color: #FF0000;" text="Refuser le voyage" />
+            <Button fx:id="buttonRefuserVoyage" disable="true" layoutX="434.0" layoutY="84.0" mnemonicParsing="false" onAction="#onRefuserVoyageClicked" prefHeight="26.0" prefWidth="134.0" style="-fx-background-color: #FF0000;" text="Refuser le voyage" />
          </children>
       </AnchorPane>
    </children>

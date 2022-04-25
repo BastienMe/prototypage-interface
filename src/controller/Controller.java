@@ -53,8 +53,6 @@ public class Controller{
 		Parent root = (Parent) loader.load();
 		Controller secController = loader.getController();
 		secController.lireFichierChat(12,344);
-		//secController.net = net;
-		//secController.easyModel = easyModel;
 		
 		Stage stage = new Stage();
 		stage.setTitle("Communication");
@@ -72,30 +70,22 @@ public class Controller{
 	public void OnEnvoyerMessageClicked(ActionEvent event) throws IOException {
 		int idVoyage = 12;
 		int idUtilisateur = 344;
+		
 		if(textFieldChat.getText().length() != 0) {
 			String textFinal = textFieldChat.getText();
 			textFieldChat.clear();
 			Text text = new Text(textFinal);
-			text.setWrappingWidth(150);
+			text.setWrappingWidth(250);
 			BorderPane borderPane = new BorderPane();
-			borderPane.setPrefWidth(295);
+			borderPane.setPrefWidth(611);
 			BorderPane borderPane1 = new BorderPane();
-			//if(!hote) {
-				borderPane.setLeft(borderPane1);
-				borderPane1.setLeft(text);
-				
-				borderPane1.setStyle("-fx-background-color: #D3D3D3; -fx-background-radius: 5px;");
-				creeFichierChat(idVoyage,idUtilisateur);
-				ecrireFichierChat(idVoyage,idUtilisateur,hote,textFinal);
-				/*}else {
-				borderPane.setRight(borderPane1);
-				borderPane1.setRight(text);
-				
-				borderPane1.setStyle("-fx-background-color: #6e97f0; -fx-background-radius: 5px;");
-				creeFichierChat(idVoyage,idUtilisateur);
-				ecrireFichierChat(idVoyage,idUtilisateur,hote,textFinal);
-			}*/
+			borderPane.setLeft(borderPane1);
+			borderPane1.setLeft(text);
 			
+			borderPane1.setStyle("-fx-background-color: #D3D3D3; -fx-background-radius: 5px;");
+			creeFichierChat(idVoyage,idUtilisateur);
+			ecrireFichierChat(idVoyage,idUtilisateur,hote,textFinal);
+		
 			
 			vBoxChat.getChildren().add(borderPane);
 			vBoxChat.autosize();
@@ -185,9 +175,9 @@ public class Controller{
 	public void setChat(boolean messageHote, String message) {
 		
 		Text text = new Text(message);
-		text.setWrappingWidth(150);
+		text.setWrappingWidth(250);
 		BorderPane borderPane = new BorderPane();
-		borderPane.setPrefWidth(295);
+		borderPane.setPrefWidth(611);
 		BorderPane borderPane1 = new BorderPane();
 		if(!messageHote) {
 			if(!hote) {
@@ -223,11 +213,11 @@ public class Controller{
 	}
 	
 	public void setValidation(String code, String message) {
-		if(code.equals("|vv|") || code.equals("|vh|")) {
+		if(code.equals("|vv|")) {
 			Text text = new Text(message);
-			text.setWrappingWidth(150);
+			text.setWrappingWidth(250);
 			BorderPane borderPane = new BorderPane();
-			borderPane.setPrefWidth(295);
+			borderPane.setPrefWidth(611);
 			BorderPane borderPane1 = new BorderPane();
 		
 			borderPane.setCenter(borderPane1);
@@ -247,15 +237,36 @@ public class Controller{
 			if(buttonHoteValiderVoyage != null) {
 				buttonHoteValiderVoyage.setDisable(false);
 				buttonRefuserVoyage.setDisable(false);
-			}
+			}	
+		}else if(code.equals("|vh|")) {
+			Text text = new Text(message);
+			text.setWrappingWidth(250);
+			BorderPane borderPane = new BorderPane();
+			borderPane.setPrefWidth(611);
+			BorderPane borderPane1 = new BorderPane();
 		
+			borderPane.setCenter(borderPane1);
+			borderPane1.setCenter(text);
 			
-		} else if(code.equals("|rh|")) {
+			borderPane1.setStyle("-fx-background-color: #0DFF00; -fx-background-radius: 5px;");
+			
+			vBoxChat.getChildren().add(borderPane);
+			vBoxChat.autosize();
+			
+			anchorPaneChat.setPrefHeight(vBoxChat.getHeight());
+			scrollPaneChat.setVvalue(1.0); 
+			
+			if(buttonHoteValiderVoyage != null) {
+				buttonHoteValiderVoyage.setDisable(true);
+				buttonRefuserVoyage.setDisable(true);
+			}	
+			
+		}else if(code.equals("|rh|")) {
 			
 			Text text = new Text(message);
-			text.setWrappingWidth(150);
+			text.setWrappingWidth(250);
 			BorderPane borderPane = new BorderPane();
-			borderPane.setPrefWidth(295);
+			borderPane.setPrefWidth(611);
 			BorderPane borderPane1 = new BorderPane();
 		
 			borderPane.setCenter(borderPane1);
@@ -294,11 +305,12 @@ public class Controller{
 	public static ArrayList<String> readDiscussionsFolder() {
 		ArrayList<String> listeNomFichiers = new ArrayList<String>();
 		File folder = new File("Discussions");
-		
-		for (final File fileEntry : folder.listFiles()) {
-			//System.out.println(fileEntry.getName());
-			listeNomFichiers.add(fileEntry.getName());
-	    }
+		if(folder.listFiles() != null) {
+			for (final File fileEntry : folder.listFiles()) {
+				//System.out.println(fileEntry.getName());
+				listeNomFichiers.add(fileEntry.getName());
+		    }
+		}
 		
 		return listeNomFichiers;
 	}
@@ -387,9 +399,9 @@ public class Controller{
 		int idUtilisateur = 344;
 		//buttonHoteValiderVoyage.setDisable(false);
 		Text text = new Text("Voyage validé par le voyageur");
-		text.setWrappingWidth(150);
+		text.setWrappingWidth(250);
 		BorderPane borderPane = new BorderPane();
-		borderPane.setPrefWidth(295);
+		borderPane.setPrefWidth(611);
 		BorderPane borderPane1 = new BorderPane();
 	
 		borderPane.setCenter(borderPane1);
@@ -414,9 +426,9 @@ public class Controller{
 		int idUtilisateur = 344;
 		//buttonHoteValiderVoyage.setDisable(false);
 		Text text = new Text("Voyage validé par l'hôte");
-		text.setWrappingWidth(150);
+		text.setWrappingWidth(250);
 		BorderPane borderPane = new BorderPane();
-		borderPane.setPrefWidth(295);
+		borderPane.setPrefWidth(611);
 		BorderPane borderPane1 = new BorderPane();
 	
 		borderPane.setCenter(borderPane1);
@@ -436,13 +448,14 @@ public class Controller{
 	}
 	public void onRefuserVoyageClicked() {
 		buttonRefuserVoyage.setDisable(true);
+		buttonHoteValiderVoyage.setDisable(true);
 		int idVoyage = 12;
 		int idUtilisateur = 344;
 		//buttonHoteValiderVoyage.setDisable(false);
 		Text text = new Text("Voyage refusé par l'hôte");
-		text.setWrappingWidth(150);
+		text.setWrappingWidth(250);
 		BorderPane borderPane = new BorderPane();
-		borderPane.setPrefWidth(295);
+		borderPane.setPrefWidth(611);
 		BorderPane borderPane1 = new BorderPane();
 	
 		borderPane.setCenter(borderPane1);
