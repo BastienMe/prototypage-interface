@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="controller.Controller">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="controller.DiscussionController">
    <children>
       <AnchorPane layoutX="-128.0" layoutY="-208.0" prefHeight="706.0" prefWidth="448.0">
          <children>
