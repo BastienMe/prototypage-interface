@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import controller.Controller;
+import controller.DiscussionController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,13 +32,16 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 //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
 //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
 //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
-public class Controller{
+public class DiscussionController{
 	
 	@FXML TextField textFieldChat;
 	@FXML VBox vBoxChat;
@@ -51,9 +54,9 @@ public class Controller{
 	@FXML MenuButton buttonMenu;
 	boolean hote = false;
 	int idVoyage = 0;
-	int idVoyageur = 7;
-	int idHote = 1;
-	int idUtilisateurConnecte = 7;
+	int idVoyageur = 8;
+	int idHote = 3;
+	int idUtilisateurConnecte = 3;
 	
 	public void onMenuButtonProfilClicked(ActionEvent event) {
 		
@@ -61,7 +64,7 @@ public class Controller{
 	public void onMenuButtonMessagerieClicked(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/ListeDiscussions.fxml"));
 		Parent root = (Parent) loader.load();
-		Controller secController = loader.getController();
+		DiscussionController secController = loader.getController();
 		
 		//secController.net = net;
 		//secController.easyModel = easyModel;
@@ -80,7 +83,7 @@ public class Controller{
 	public void OnContacterClicked(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/DiscussionVoyageur.fxml"));
 		Parent root = (Parent) loader.load();
-		Controller secController = loader.getController();
+		DiscussionController secController = loader.getController();
 		secController.lireFichierChat(idVoyage,idVoyageur,idHote);
 		
 		Stage stage = new Stage();
@@ -89,7 +92,7 @@ public class Controller{
 		stage.setScene(new Scene(root));
 		stage.show();
 		
-		ImageView imageUser = new ImageView("C:\\Users\\meffr\\git\\prototypage-interface\\User_icon_BLACK-01.png");
+		ImageView imageUser = new ImageView("https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png");
 		imageUser.setFitHeight(50);
 		imageUser.setFitWidth(50);
 		
@@ -111,6 +114,7 @@ public class Controller{
 			String textFinal = textFieldChat.getText();
 			textFieldChat.clear();
 			Text text = new Text(textFinal);
+			text.setFont(Font.font("ellipsis", FontWeight.NORMAL, FontPosture.REGULAR, 14));
 			text.setWrappingWidth(250);
 			BorderPane borderPane = new BorderPane();
 			borderPane.setPrefWidth(611);
@@ -137,10 +141,10 @@ public class Controller{
 	
 	public void creeFichierChat(int idVoyage, int idVoyageur, int idHote) {
 		try {
-	      File file = new File("Discussions/"+ idVoyage + "_"+ idVoyageur +"_"+idHote+".txt");
+	      File file = new File("src/application/assets/d/"+ idVoyage + "_"+ idVoyageur +"_"+idHote+".txt");
 	      if(!file.exists()) {
 	    	  file.createNewFile();
-		      FileWriter fileWriter = new FileWriter("Discussions/"+ idVoyage + "_"+ idVoyageur +"_"+idHote+".txt",true);
+		      FileWriter fileWriter = new FileWriter("src/application/assets/d/"+ idVoyage + "_"+ idVoyageur +"_"+idHote+".txt",true);
 		      fileWriter.write(idVoyage+"\n");
 		      fileWriter.write(idVoyageur+"\n");
 		      fileWriter.write(idHote+"\n");
@@ -154,7 +158,7 @@ public class Controller{
 	
 	public void ecrireFichierChat(int idVoyage, int idUtilisateur, int idHote, boolean hote, String message) {
 		try {
-	      FileWriter fileWriter = new FileWriter("Discussions/"+ idVoyage+"_"+ idUtilisateur +"_"+idHote+".txt",true);
+	      FileWriter fileWriter = new FileWriter("src/application/assets/d/"+ idVoyage+"_"+ idUtilisateur +"_"+idHote+".txt",true);
 	      if(hote) {
 	    	  fileWriter.write("*"+message+"\n");
 	      } else {
@@ -168,7 +172,7 @@ public class Controller{
 	
 	public void lireFichierChat(int idVoyage, int utilisateur, int idHote) {
 		try {
-	      File file = new File("Discussions/"+ idVoyage +"_"+ idVoyageur+"_"+idHote +".txt");
+	      File file = new File("src/application/assets/d/"+ idVoyage +"_"+ idVoyageur+"_"+idHote +".txt");
 	      if(file.exists()) {
 		      Scanner scanner = new Scanner(file);
 		      int ligne = 0;
@@ -212,6 +216,7 @@ public class Controller{
 	public void setChat(boolean messageHote, String message) {
 		
 		Text text = new Text(message);
+		text.setFont(Font.font("ellipsis", FontWeight.NORMAL, FontPosture.REGULAR, 14));
 		text.setWrappingWidth(250);
 		BorderPane borderPane = new BorderPane();
 		borderPane.setPrefWidth(611);
@@ -226,7 +231,7 @@ public class Controller{
 				borderPane.setRight(borderPane1);
 				borderPane1.setRight(text);
 				
-				borderPane1.setStyle("-fx-background-color: #6e97f0; -fx-background-radius: 5px;");
+				borderPane1.setStyle("-fx-background-color: #a7da6b; -fx-background-radius: 5px;");
 			}
 		} else {
 			if(hote) {
@@ -238,7 +243,7 @@ public class Controller{
 				borderPane.setRight(borderPane1);
 				borderPane1.setRight(text);
 				
-				borderPane1.setStyle("-fx-background-color: #6e97f0; -fx-background-radius: 5px;");
+				borderPane1.setStyle("-fx-background-color: #a7da6b; -fx-background-radius: 5px;");
 			}
 		}
 		vBoxChat.getChildren().add(borderPane);
@@ -252,15 +257,16 @@ public class Controller{
 	public void setValidation(String code, String message) {
 		if(code.equals("|vv|")) {
 			Text text = new Text(message);
-			text.setWrappingWidth(250);
+			text.setFont(Font.font("ellipsis", FontWeight.BOLD, FontPosture.REGULAR, 20));
+			//text.setWrappingWidth(250);
 			BorderPane borderPane = new BorderPane();
-			borderPane.setPrefWidth(611);
+			borderPane.setPrefWidth(610);
 			BorderPane borderPane1 = new BorderPane();
 		
 			borderPane.setCenter(borderPane1);
 			borderPane1.setCenter(text);
 			
-			borderPane1.setStyle("-fx-background-color: #0DFF00; -fx-background-radius: 5px;");
+			borderPane1.setStyle("-fx-background-color: #88E739; -fx-background-radius: 5px;");
 			
 			vBoxChat.getChildren().add(borderPane);
 			vBoxChat.autosize();
@@ -277,15 +283,16 @@ public class Controller{
 			}	
 		}else if(code.equals("|vh|")) {
 			Text text = new Text(message);
+			text.setFont(Font.font("ellipsis", FontWeight.BOLD, FontPosture.REGULAR, 20));
 			text.setWrappingWidth(250);
 			BorderPane borderPane = new BorderPane();
-			borderPane.setPrefWidth(611);
+			borderPane.setPrefWidth(610);
 			BorderPane borderPane1 = new BorderPane();
 		
 			borderPane.setCenter(borderPane1);
 			borderPane1.setCenter(text);
 			
-			borderPane1.setStyle("-fx-background-color: #0DFF00; -fx-background-radius: 5px;");
+			borderPane1.setStyle("-fx-background-color: #88E739; -fx-background-radius: 5px;");
 			
 			vBoxChat.getChildren().add(borderPane);
 			vBoxChat.autosize();
@@ -301,15 +308,16 @@ public class Controller{
 		}else if(code.equals("|rh|")) {
 			
 			Text text = new Text(message);
+			text.setFont(Font.font("ellipsis", FontWeight.BOLD, FontPosture.REGULAR, 20));
 			text.setWrappingWidth(250);
 			BorderPane borderPane = new BorderPane();
-			borderPane.setPrefWidth(611);
+			borderPane.setPrefWidth(610);
 			BorderPane borderPane1 = new BorderPane();
 		
 			borderPane.setCenter(borderPane1);
 			borderPane1.setCenter(text);
 			
-			borderPane1.setStyle("-fx-background-color: #FF0000; -fx-background-radius: 5px;");
+			borderPane1.setStyle("-fx-background-color: #E74D4D; -fx-background-radius: 5px;");
 			
 			vBoxChat.getChildren().add(borderPane);
 			vBoxChat.autosize();
@@ -326,7 +334,7 @@ public class Controller{
 	public void onMessagerieClicked() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/ListeDiscussions.fxml"));
 		Parent root = (Parent) loader.load();
-		Controller secController = loader.getController();
+		DiscussionController secController = loader.getController();
 		
 		//secController.net = net;
 		//secController.easyModel = easyModel;
@@ -343,7 +351,7 @@ public class Controller{
 	
 	public static ArrayList<String> readDiscussionsFolder() {
 		ArrayList<String> listeNomFichiers = new ArrayList<String>();
-		File folder = new File("Discussions");
+		File folder = new File("src/application/assets/d");
 		if(folder.listFiles() != null) {
 			for (final File fileEntry : folder.listFiles()) {
 				//System.out.println(fileEntry.getName());
@@ -370,7 +378,7 @@ public class Controller{
 			String dernierMessage="";
 			String nomHote="";
 			try {
-		      File file = new File("Discussions/"+nomMessagerie);
+		      File file = new File("src/application/assets/d/"+nomMessagerie);
 		      if(file.exists()) {
 			      Scanner scanner = new Scanner(file);
 			      while (scanner.hasNextLine()) {
@@ -416,7 +424,7 @@ public class Controller{
 				vBoxMessagerie.getChildren().add(textNomVoyage);
 				vBoxMessagerie.getChildren().add(textNomUtilisateur);
 				vBoxMessagerie.getChildren().add(textDernierMessage);
-				vBoxMessagerie.setStyle("-fx-background-color: #6e97f0; -fx-background-radius: 5px;");
+				vBoxMessagerie.setStyle("-fx-background-color: #a7da6b; -fx-background-radius: 5px;");
 				
 				vBoxMessagerie.setOnMouseClicked(event -> {
 					FXMLLoader loader = null;
@@ -428,7 +436,7 @@ public class Controller{
 					Parent root;
 					try {
 						root = (Parent) loader.load();
-						Controller secController = loader.getController();
+						DiscussionController secController = loader.getController();
 						
 						secController.hote = hote;
 						secController.lireFichierChat(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]));
@@ -453,15 +461,16 @@ public class Controller{
 		buttonVoyageurValiderVoyage.setDisable(true);
 		//buttonHoteValiderVoyage.setDisable(false);
 		Text text = new Text("Voyage validé par le voyageur");
-		text.setWrappingWidth(250);
+		text.setFont(Font.font("ellipsis", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		//text.setWrappingWidth(250);
 		BorderPane borderPane = new BorderPane();
-		borderPane.setPrefWidth(611);
+		borderPane.setPrefWidth(610);
 		BorderPane borderPane1 = new BorderPane();
 	
 		borderPane.setCenter(borderPane1);
 		borderPane1.setCenter(text);
 		
-		borderPane1.setStyle("-fx-background-color: #0DFF00; -fx-background-radius: 5px;");
+		borderPane1.setStyle("-fx-background-color: #88E739; -fx-background-radius: 5px;");
 		creeFichierChat(idVoyage,idVoyageur,idHote);
 		ecrireFichierChat(idVoyage,idVoyageur,idHote,false,"|vv|Voyage validé par le voyageur");
 	
@@ -479,15 +488,16 @@ public class Controller{
 		
 		//buttonHoteValiderVoyage.setDisable(false);
 		Text text = new Text("Voyage validé par l'hôte");
-		text.setWrappingWidth(250);
+		text.setFont(Font.font("ellipsis", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		//text.setWrappingWidth(250);
 		BorderPane borderPane = new BorderPane();
-		borderPane.setPrefWidth(611);
+		borderPane.setPrefWidth(610);
 		BorderPane borderPane1 = new BorderPane();
 	
 		borderPane.setCenter(borderPane1);
 		borderPane1.setCenter(text);
 		
-		borderPane1.setStyle("-fx-background-color: #0DFF00; -fx-background-radius: 5px;");
+		borderPane1.setStyle("-fx-background-color: #88E739; -fx-background-radius: 5px;");
 		creeFichierChat(idVoyage,idVoyageur,idHote);
 		ecrireFichierChat(idVoyage,idVoyageur,idHote,true,"|vh|Voyage validé par l'hôte");
 	
@@ -505,15 +515,16 @@ public class Controller{
 		
 		//buttonHoteValiderVoyage.setDisable(false);
 		Text text = new Text("Voyage refusé par l'hôte");
-		text.setWrappingWidth(250);
+		text.setFont(Font.font("ellipsis", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		//text.setWrappingWidth(250);
 		BorderPane borderPane = new BorderPane();
-		borderPane.setPrefWidth(611);
+		borderPane.setPrefWidth(610);
 		BorderPane borderPane1 = new BorderPane();
 	
 		borderPane.setCenter(borderPane1);
 		borderPane1.setCenter(text);
 		
-		borderPane1.setStyle("-fx-background-color: #FF0000; -fx-background-radius: 5px;");
+		borderPane1.setStyle("-fx-background-color: #E74D4D; -fx-background-radius: 5px;");
 		creeFichierChat(idVoyage,idVoyageur,idHote);
 		ecrireFichierChat(idVoyage,idVoyageur,idHote,true,"|rh|Voyage refusé par l'hôte");
 		
